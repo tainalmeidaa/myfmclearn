@@ -15,7 +15,10 @@ theorem doubleneg_intro :
 
 theorem doubleneg_elim :
   ¬ ¬ P → P  := by
-  sorry
+  intro nnp
+  by_cases h : P
+  exact h
+  contradiction
 
 theorem doubleneg_law :
   ¬ ¬ P ↔ P  := by
