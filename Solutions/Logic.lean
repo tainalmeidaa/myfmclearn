@@ -25,12 +25,15 @@ theorem doubleneg_law :
   sorry
 
 
+
 ------------------------------------------------
 -- Commutativity of ∨,∧
 ------------------------------------------------
 
 theorem disj_comm :
   (P ∨ Q) → (Q ∨ P)  := by
+  intro hpq
+  rcases hpq
   sorry
 
 theorem conj_comm :
