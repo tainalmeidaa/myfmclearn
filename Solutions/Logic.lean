@@ -24,7 +24,12 @@ theorem doubleneg_law :
   ¬ ¬ P ↔ P  := by
   constructor
   intro (nnp : ¬ ¬ P)
-
+  by_cases h : P
+  exact h
+  contradiction
+  intro (hp : P)
+  intro (np : ¬ P)
+  contradiction
 
 ------------------------------------------------
 -- Commutativity of ∨,∧
@@ -32,9 +37,13 @@ theorem doubleneg_law :
 
 theorem disj_comm :
   (P ∨ Q) → (Q ∨ P)  := by
-  intro hpq
-  rcases hpq
-  sorry
+
+  intro (hpq: (P ∨ Q))
+  rcases hpq with (hp | hq)
+  -- caso P
+  right; exact hp
+  -- caso Q
+  left; exact hq
 
 theorem conj_comm :
   (P ∧ Q) → (Q ∧ P)  := by
