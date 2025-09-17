@@ -80,7 +80,14 @@ theorem disj_as_impl :
 
 theorem impl_as_contrapositive :
   (P → Q) → (¬ Q → ¬ P)  := by
-  sorry
+  intro (hpq : (P → Q))
+  by_cases h : P
+  have hq : Q := hpq h -- aplicando P → Q em P
+  intro (nq : ¬ Q)
+  contradiction
+  intro (np' : ¬ Q)
+  exact h
+
 
 theorem impl_as_contrapositive_converse :
   (¬ Q → ¬ P) → (P → Q)  := by
