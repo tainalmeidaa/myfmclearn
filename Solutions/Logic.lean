@@ -125,8 +125,31 @@ theorem contrapositive_law :
 
 theorem lem_irrefutable :
   ¬ ¬ (P ∨ ¬ P)  := by
-  sorry
 
+intro (hpp : ¬ (P ∨ ¬ P))
+by_cases h : P ;
+
+-- caso P
+   -- vou demonstrar pp
+ have pp : (P ∨ ¬ P) := by{
+ left; exact h
+ };
+
+contradiction
+
+  -- vou demonstrar hpp
+have npp : ¬ (P ∨ ¬ P) := by{
+  exact hpp
+};
+
+-- caso não P
+have z : (P ∨ ¬ P) := by{
+right; exact h
+};
+
+contradiction
+
+-- OBS : não devo usar magia aqui. preciso refazer
 
 ------------------------------------------------
 -- Peirce's law
