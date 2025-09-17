@@ -47,8 +47,11 @@ theorem disj_comm :
 
 theorem conj_comm :
   (P ∧ Q) → (Q ∧ P)  := by
-  sorry
-
+  intro (hpq : (P ∧ Q))
+  rcases hpq with ⟨ hp , hq ⟩
+  constructor
+  exact hq
+  exact hp
 
 ------------------------------------------------
 -- Interdefinability of →,∨
