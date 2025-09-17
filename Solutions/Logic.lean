@@ -59,7 +59,12 @@ theorem conj_comm :
 
 theorem impl_as_disj_converse :
   (¬ P ∨ Q) → (P → Q)  := by
-  sorry
+  intro (hpq : (¬ P ∨ Q))
+  intro (hip: P)
+  rcases hpq with (hp | hq)
+  contradiction
+  exact hq
+
 
 theorem disj_as_impl :
   (P ∨ Q) → (¬ P → Q)  := by
