@@ -68,8 +68,11 @@ theorem impl_as_disj_converse :
 
 theorem disj_as_impl :
   (P ∨ Q) → (¬ P → Q)  := by
-  sorry
-
+  intro (hpq : P ∨ Q)
+  intro (np : ¬ P)
+  rcases hpq with (hp | hq)
+  contradiction
+  exact hq
 
 ------------------------------------------------
 -- Contrapositive
