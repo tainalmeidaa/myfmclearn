@@ -149,7 +149,7 @@ right; exact h
 
 contradiction
 
--- OBS : não devo usar magia aqui. preciso refazer
+-- OBS : não devo usar magia aqui(?) preciso refazer
 
 ------------------------------------------------
 -- Peirce's law
@@ -175,7 +175,17 @@ theorem impl_linear :
 
 theorem disj_as_negconj :
   P ∨ Q → ¬ (¬ P ∧ ¬ Q)  := by
-  sorry
+
+  intro (hpq : P ∨ Q)
+  intro (npq : ¬ P ∧ ¬ Q)
+  rcases hpq with (hp|hq)
+  -- case inl
+  rcases npq with ⟨hp , hq⟩
+  contradiction
+  -- case inr
+  rcases npq with ⟨np , nq⟩
+  contradiction
+
 
 theorem conj_as_negdisj :
   P ∧ Q → ¬ (¬ P ∨ ¬ Q)  := by
