@@ -2,7 +2,6 @@ section propositional
 
 variable (P Q R : Prop)
 
-
 ------------------------------------------------
 -- Double negation
 ------------------------------------------------
@@ -173,17 +172,14 @@ theorem peirce_law_weak :
 
 theorem impl_linear :
   (P → Q) ∨ (Q → P)  := by
-  right;
-  intro (hq : Q)
+
   by_cases hp : P
-  -- caso P
+  right;
+  intro (q : Q)
   exact hp
-  -- caso ¬ P
-  -- vou demonstrar ¬ P:
-  have (hnp : ¬ P) := by {
-    intro
-  }
-  sorry
+  left;
+  intro (p : P)
+  contradiction
 
 
 ------------------------------------------------
