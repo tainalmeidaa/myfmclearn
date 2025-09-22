@@ -131,15 +131,15 @@ by_cases h : P ;
 
 -- caso P
    -- vou demonstrar pp
- have pp : (P ∨ ¬ P) := by{
- left; exact h
- };
+have pp : (P ∨ ¬ P) := by{
+left; exact h
+};
 
 contradiction
 
   -- vou demonstrar hpp
 have npp : ¬ (P ∨ ¬ P) := by{
-  exact hpp
+exact hpp
 };
 
 -- caso não P
@@ -157,8 +157,15 @@ contradiction
 
 theorem peirce_law_weak :
   ((P → Q) → P) → ¬ ¬ P  := by
-  sorry
-
+  intro (h1 : ((P → Q) → P))
+  intro (h2: ¬ P)
+  -- vou demonstrar (P → Q):
+  have h3 : (P → Q) := by {
+    intro (h3': P)
+    contradiction
+  }
+  have h4 : P := h1 h3 --- apliquei h1 : (P → Q) → P em h3 : (P → Q) para obter P
+  contradiction
 
 ------------------------------------------------
 -- Linearity of →
@@ -166,6 +173,16 @@ theorem peirce_law_weak :
 
 theorem impl_linear :
   (P → Q) ∨ (Q → P)  := by
+  right;
+  intro (hq : Q)
+  by_cases hp : P
+  -- caso P
+  exact hp
+  -- caso ¬ P
+  -- vou demonstrar ¬ P:
+  have (hnp : ¬ P) := by {
+    intro
+  }
   sorry
 
 
