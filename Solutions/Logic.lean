@@ -222,7 +222,24 @@ theorem demorgan_disj :
 
   intro (h : ¬ (P ∨ Q))
   constructor
-  sorry
+  -- parte não P
+  intro (p : P)
+  have h' : (P ∨ Q) := by {
+    left;
+    exact p;
+  };
+
+  contradiction
+
+  -- parte não q
+  intro (q : Q)
+  have h' : (P ∨ Q) := by {
+    right;
+    exact q;
+  };
+
+  contradiction
+  
 
 
 theorem demorgan_disj_converse :
