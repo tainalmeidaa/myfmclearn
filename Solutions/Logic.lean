@@ -309,7 +309,9 @@ theorem weaken_disj_left :
 
 theorem weaken_conj_right :
   (P ∧ Q) → P  := by
-  sorry
+  intro (hpq : P ∧ Q)
+  rcases hpq with ⟨hp , hq⟩
+  exact hp;
 
 theorem weaken_conj_left :
   (P ∧ Q) → Q  := by
