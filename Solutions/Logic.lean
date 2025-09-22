@@ -239,7 +239,7 @@ theorem demorgan_disj :
   };
 
   contradiction
-  
+
 
 
 theorem demorgan_disj_converse :
@@ -261,9 +261,21 @@ theorem demorgan_conj :
   ¬ (P ∧ Q) → (¬ Q ∨ ¬ P)  := by
   sorry
 
+
+
 theorem demorgan_conj_converse :
   (¬ Q ∨ ¬ P) → ¬ (P ∧ Q)  := by
-  sorry
+
+  intro (npq: (¬ Q ∨ ¬ P))
+  intro (npq': P ∧ Q)
+  rcases npq with (np | nq)
+  -- caso não Q
+  rcases npq' with ⟨p , q⟩
+  contradiction
+  -- caso não P
+  rcases npq' with ⟨p , q⟩
+  contradiction
+
 
 theorem demorgan_conj_law :
   ¬ (P ∧ Q) ↔ (¬ Q ∨ ¬ P)  := by
