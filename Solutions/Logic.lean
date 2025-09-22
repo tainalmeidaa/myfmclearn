@@ -288,8 +288,8 @@ theorem uncurry_prop :
 
 theorem impl_refl :
   P → P  := by
-  sorry
-
+  intro (hp : P)
+  exact hp;
 
 ------------------------------------------------
 -- Weakening and contraction
