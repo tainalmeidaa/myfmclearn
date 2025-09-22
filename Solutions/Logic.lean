@@ -344,7 +344,18 @@ theorem disj_idem :
 
 theorem conj_idem :
   (P ∧ P) ↔ P := by
-  sorry
+  constructor
+  -- caso (P ∧ P) → P
+  intro (hp : (P ∧ P));
+  rcases hp with ⟨hp1 , hp2⟩
+  exact hp1;
+  -- caso P → (P ∧ P)
+  intro (hp' : P)
+  constructor
+  -- caso L
+  exact hp';
+  --caso R
+  exact hp';
 
 
 ------------------------------------------------
