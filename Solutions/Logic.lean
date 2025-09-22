@@ -223,13 +223,26 @@ theorem conj_as_negdisj :
 
 theorem demorgan_disj :
   ¬ (P ∨ Q) → (¬ P ∧ ¬ Q)  := by
+
   intro (h : ¬ (P ∨ Q))
+  constructor
   sorry
 
 
 theorem demorgan_disj_converse :
   (¬ P ∧ ¬ Q) → ¬ (P ∨ Q)  := by
-  sorry
+
+  intro (h : (¬ P ∧ ¬ Q))
+  intro (h': P ∨ Q)
+  -- separo em casos P ∨ Q
+  rcases h' with (hp | hq)
+  -- extraio L
+  rcases h with ⟨hp , hq⟩
+  contradiction
+  -- extraio R
+  rcases h with ⟨hp , hq⟩
+  contradiction
+
 
 theorem demorgan_conj :
   ¬ (P ∧ Q) → (¬ Q ∨ ¬ P)  := by
