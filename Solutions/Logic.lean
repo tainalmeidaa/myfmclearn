@@ -286,14 +286,17 @@ theorem curry_prop :
     --caso R
     exact hq
   };
-  have hr : R := h hpq
+  have hr : R := h hpq -- aplicar para obter
   exact hr;
 
 
 theorem uncurry_prop :
   (P → (Q → R)) → ((P ∧ Q) → R)  := by
-  sorry
-
+  intro (h : (P → (Q → R)))
+  intro (hpq : (P ∧ Q))
+  rcases hpq with ⟨hp,hq⟩
+  have hr: R := h hp hq
+  exact hr;
 
 ------------------------------------------------
 -- Reflexivity of →
