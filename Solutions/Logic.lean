@@ -259,8 +259,8 @@ theorem demorgan_disj_converse :
 
 theorem demorgan_conj :
   ¬ (P ∧ Q) → (¬ Q ∨ ¬ P)  := by
-  sorry
 
+  sorry
 
 
 theorem demorgan_conj_converse :
@@ -292,7 +292,22 @@ theorem demorgan_disj_law :
 
 theorem distr_conj_disj :
   P ∧ (Q ∨ R) → (P ∧ Q) ∨ (P ∧ R)  := by
+
+  intro (h : P ∧ (Q ∨ R))
+  left;
+  constructor
+  -- caso L
+  rcases h with ⟨h1,h2⟩
+  exact h1
+  --caso R
+  rcases h with ⟨h1,h2⟩
+  rcases h2 with (h1'|h2')
+  -- case h.right.intro.inl
+  exact h1'
+  -- case h.right.intro.inr
   sorry
+
+
 
 theorem distr_conj_disj_converse :
   (P ∧ Q) ∨ (P ∧ R) → P ∧ (Q ∨ R)  := by
