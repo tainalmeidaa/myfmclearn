@@ -275,7 +275,20 @@ theorem distr_disj_conj_converse :
 
 theorem curry_prop :
   ((P ∧ Q) → R) → (P → (Q → R))  := by
-  sorry
+  intro (h : ((P ∧ Q) → R))
+  intro (hp : P)
+  intro (hq : Q)
+  -- vou demonstrar P ∧ Q
+  have hpq : (P ∧ Q) := by{
+    constructor
+    --caso L
+    exact hp
+    --caso R
+    exact hq
+  };
+  have hr : R := h hpq
+  exact hr;
+
 
 theorem uncurry_prop :
   (P → (Q → R)) → ((P ∧ Q) → R)  := by
