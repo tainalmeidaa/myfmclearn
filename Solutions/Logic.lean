@@ -327,7 +327,20 @@ theorem weaken_conj_left :
 
 theorem disj_idem :
   (P ∨ P) ↔ P  := by
-  sorry
+  constructor
+  -- caso (P ∨ P) → P
+  intro (hp : (P ∨ P))
+  rcases hp with (hp1 | hp2)
+    -- caso P
+  exact hp1;
+    --caso P
+  exact hp2;
+
+  -- caso P → (P ∨ P)
+  intro (hp': P)
+  left;
+  exact hp';
+
 
 theorem conj_idem :
   (P ∧ P) ↔ P := by
