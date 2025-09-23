@@ -322,8 +322,8 @@ exact hp
 
 -------------- PARTE  (¬ Q ∨ ¬ P) → ¬ (P ∧ Q) ------------
 
-intro (h' : (¬ Q ∨ ¬ P))--h_disjuncao
-intro (h'': (P ∧ Q))--h_conjuncao
+intro (h' : (¬ Q ∨ ¬ P))
+intro (h'': (P ∧ Q))
 rcases h' with (nq|np)
 -- Caso nq: ¬ Q
 rcases h'' with ⟨p, q⟩
@@ -335,54 +335,44 @@ have f: False := np p
 assumption
 
 
+
 theorem demorgan_disj_law :
   ¬ (P ∨ Q) ↔ (¬ P ∧ ¬ Q)  := by
 
-  constructor
+constructor
+--------- PARTE  ¬ (P ∨ Q) → (¬ P ∧ ¬ Q) -------------
+intro (h : ¬ (P ∨ Q))
+constructor
+----------- parte ¬ P
+intro hp
+have pvq : P ∨ Q := by {
+left
+exact hp
+}
+have f : False := h pvq
+assumption
 
-  --- parte ¬(P ∨ Q) → ¬P ∧ ¬Q
-  intro (h : ¬(P ∨ Q))
-  by_cases p : P
-  have h' : P ∨ Q := by{
-    left
-    exact p
-  }
+---------- parte ¬ Q
+intro hq
+have pvq : P ∨ Q := by {
+right
+exact hq
+}
 
-  constructor
-  --- não P
-  intro (p' : P)
-  have boom : False := h h'
-  exact boom
-  --- não Q
-  intro (q: Q)
-  have buum : False := h h'
-  exact buum
+have f : False := h pvq
+assumption
 
-  constructor
-  exact p
-
-  have h' : P ∨ Q := by{
-    by_cases q' : Q
-    right
-    exact q'
-
-    left
-    false_or_by_contra
-    by_cases p'': P
-    --- caso p
-    contradiction
-
-    ----------
-  }
-
-  intro (q'' : Q)
-  have bamm : False :=  h h'
-  exact bamm
-
-  sorry
-
-  --- parte ¬P ∧ ¬Q → ¬(P ∨ Q)
-
+------------- PARTE (¬ P ∧ ¬ Q) → ¬ (P ∨ Q) ---------------
+intro (h: (¬P ∧ ¬Q))
+intro (pvq: (P ∨ Q))
+rcases h with ⟨np, nq⟩
+rcases pvq with (p|q)
+-------- caso P
+have f : False := np p
+assumption
+-------- caso Q
+have f: False := nq q
+assumption
 
 ------------------------------------------------
 -- Distributivity laws between ∨,∧
