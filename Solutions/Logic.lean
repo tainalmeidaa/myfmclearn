@@ -381,19 +381,19 @@ assumption
 theorem distr_conj_disj :
   P ∧ (Q ∨ R) → (P ∧ Q) ∨ (P ∧ R)  := by
 
-  intro (h : P ∧ (Q ∨ R))
-  left;
-  rcases h with ⟨p,qr⟩
-  rcases qr with (q|r)
-
+  intro (h: P ∧ (Q ∨ R)) --h_conj
+  rcases h with ⟨p, qr⟩
+  rcases qr with (q | r)
+  ---- caso Q
+  left
   constructor
   exact p
   exact q
-
+  ---- caso R
+  right
   constructor
   exact p
-  sorry
-
+  exact r
 
 
 theorem distr_conj_disj_converse :
