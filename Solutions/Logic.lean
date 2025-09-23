@@ -332,9 +332,6 @@ theorem demorgan_disj_law :
     contradiction
 
     ----------
-
-
-
   }
 
   intro (q'' : Q)
@@ -356,16 +353,14 @@ theorem distr_conj_disj :
   intro (h : P ∧ (Q ∨ R))
   left;
   rcases h with ⟨p,qr⟩
-
-  constructor -- no meu alvo left (P ∧ Q)
-  ----------PARTE P ------------------------
-  exact p;
-
-  ---------PARTE Q-------------------------
   rcases qr with (q|r)
-  -------caso Q
-  exact q;
-  -------caso R
+
+  constructor
+  exact p
+  exact q
+
+  constructor
+  exact p
   sorry
 
 
@@ -551,7 +546,9 @@ theorem conj_idem :
 
 theorem false_bottom :
   False → P := by
-  sorry
+  intro (h : False)
+  false_or_by_contra
+  exact h
 
 theorem true_top :
   P → True  := by
