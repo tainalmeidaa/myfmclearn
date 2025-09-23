@@ -552,7 +552,8 @@ theorem false_bottom :
 
 theorem true_top :
   P → True  := by
-  sorry
+  intro (h : P)
+  solve_by_elim
 
 
 end propositional
