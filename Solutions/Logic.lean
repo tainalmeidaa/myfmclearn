@@ -339,40 +339,40 @@ assumption
 theorem demorgan_disj_law :
   ¬ (P ∨ Q) ↔ (¬ P ∧ ¬ Q)  := by
 
-constructor
---------- PARTE  ¬ (P ∨ Q) → (¬ P ∧ ¬ Q) -------------
-intro (h : ¬ (P ∨ Q))
-constructor
------------ parte ¬ P
-intro hp
-have pvq : P ∨ Q := by {
-left
-exact hp
-}
-have f : False := h pvq
-assumption
+  constructor
+  --------- PARTE  ¬ (P ∨ Q) → (¬ P ∧ ¬ Q) -------------
+  intro (h : ¬ (P ∨ Q))
+  constructor
+  ----------- parte ¬ P
+  intro hp
+  have pvq : P ∨ Q := by {
+  left
+  exact hp
+  }
+  have f : False := h pvq
+  assumption
 
----------- parte ¬ Q
-intro hq
-have pvq : P ∨ Q := by {
-right
-exact hq
-}
+  ---------- parte ¬ Q
+  intro hq
+  have pvq : P ∨ Q := by {
+  right
+  exact hq
+  }
 
-have f : False := h pvq
-assumption
+  have f : False := h pvq
+  assumption
 
-------------- PARTE (¬ P ∧ ¬ Q) → ¬ (P ∨ Q) ---------------
-intro (h: (¬P ∧ ¬Q))
-intro (pvq: (P ∨ Q))
-rcases h with ⟨np, nq⟩
-rcases pvq with (p|q)
--------- caso P
-have f : False := np p
-assumption
--------- caso Q
-have f: False := nq q
-assumption
+  ------------- PARTE (¬ P ∧ ¬ Q) → ¬ (P ∨ Q) ---------------
+  intro (h: (¬P ∧ ¬Q))
+  intro (pvq: (P ∨ Q))
+  rcases h with ⟨np, nq⟩
+  rcases pvq with (p|q)
+  -------- caso P
+  have f : False := np p
+  assumption
+  -------- caso Q
+  have f: False := nq q
+  assumption
 
 ------------------------------------------------
 -- Distributivity laws between ∨,∧
@@ -381,7 +381,7 @@ assumption
 theorem distr_conj_disj :
   P ∧ (Q ∨ R) → (P ∧ Q) ∨ (P ∧ R)  := by
 
-  intro (h: P ∧ (Q ∨ R)) --h_conj
+  intro (h: P ∧ (Q ∨ R))
   rcases h with ⟨p, qr⟩
   rcases qr with (q | r)
   ---- caso Q
@@ -458,12 +458,22 @@ theorem distr_disj_conj :
 theorem distr_disj_conj_converse :
   (P ∨ Q) ∧ (P ∨ R) → P ∨ (Q ∧ R)  := by
 
-  intro (h: (P ∨ Q) ∧ (P ∨ R))
-  sorry
-
-
-
-
+  intro (h : (P ∨ Q) ∧ (P ∨ R))
+  rcases h with ⟨pq, pr⟩
+  rcases pq with (p | q)
+  ---- CASO P
+  left
+  exact p
+  ---- CASO Q
+  rcases pr with (p | r)
+  ------- caso P
+  left
+  exact p
+  ------- caso R
+  right
+  constructor
+  exact q
+  exact r
 
 
 ------------------------------------------------
