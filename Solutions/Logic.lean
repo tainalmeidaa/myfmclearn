@@ -259,14 +259,28 @@ theorem demorgan_disj_converse :
 
 theorem demorgan_conj :
   ¬ (P ∧ Q) → (¬ Q ∨ ¬ P)  := by
+intro (h : ¬ (P ∧ Q))
+by_cases hp : P
 
-  intro h
-  false_or_by_contra
-  sorry
+-------- CASO P ------
+left
+intro hq
+  ---- vou demosntrar (P ∧ Q)
+have peq : P ∧ Q := by {
 
+constructor
 
+exact hp
 
+exact hq
+}
 
+have f : False := h peq --- aplicando h a peq para obter False
+assumption
+
+-------- CASO NÃO P -------
+right
+exact hp
 
 
 theorem demorgan_conj_converse :
