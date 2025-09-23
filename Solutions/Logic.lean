@@ -355,16 +355,17 @@ theorem distr_conj_disj :
 
   intro (h : P ∧ (Q ∨ R))
   left;
-  constructor
-  -- caso L
-  rcases h with ⟨h1,h2⟩
-  exact h1
-  --caso R
-  rcases h with ⟨h1,h2⟩
-  rcases h2 with (h1'|h2')
-  -- case h.right.intro.inl
-  exact h1'
-  -- case h.right.intro.inr
+  rcases h with ⟨p,qr⟩
+
+  constructor -- no meu alvo left (P ∧ Q)
+  ----------PARTE P ------------------------
+  exact p;
+
+  ---------PARTE Q-------------------------
+  rcases qr with (q|r)
+  -------caso Q
+  exact q;
+  -------caso R
   sorry
 
 
@@ -392,7 +393,7 @@ theorem distr_conj_disj_converse :
 
   ------------PARTE P
   constructor         -- split em P ∧ (Q ∨ R)
-  -------parte p
+  -------parte P
   exact p
   -------parte (Q ∨ R)
   right
