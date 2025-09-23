@@ -371,7 +371,32 @@ theorem distr_conj_disj :
 
 theorem distr_conj_disj_converse :
   (P ∧ Q) ∨ (P ∧ R) → P ∧ (Q ∨ R)  := by
-  sorry
+
+  intro (h : (P ∧ Q) ∨ (P ∧ R))
+
+  rcases h with (pq|pr)
+
+  -----------CASO PQ : (P ∧ Q)---------------
+  rcases pq with ⟨p,q⟩
+
+  ------------PARTE P
+  constructor          -- split em P ∧ (Q ∨ R)
+  -------parte P
+  exact p
+  -------parte (Q ∨ R)
+  left;
+  exact q
+
+  -----------CASO PR : (P ∧ R)------------------
+  rcases pr with ⟨p,r⟩
+
+  ------------PARTE P
+  constructor         -- split em P ∧ (Q ∨ R)
+  -------parte p
+  exact p
+  -------parte (Q ∨ R)
+  right
+  exact r
 
 
 
@@ -408,6 +433,8 @@ theorem distr_disj_conj_converse :
 
   intro (h: (P ∨ Q) ∧ (P ∨ R))
   sorry
+
+
 
 
 
