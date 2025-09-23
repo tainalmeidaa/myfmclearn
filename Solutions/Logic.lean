@@ -299,13 +299,40 @@ theorem demorgan_conj_converse :
 
 theorem demorgan_conj_law :
   ¬ (P ∧ Q) ↔ (¬ Q ∨ ¬ P)  := by
+
+constructor
+----------- PARTE  ¬ (P ∧ Q) → (¬ Q ∨ ¬ P) ----------
+
+intro (h : ¬ (P ∧ Q))
+by_cases hp : P
+  ---- Caso P
+left
+intro (hq : Q)
+have conjuncao : P ∧ Q := by {
   constructor
-  ---parte ¬(P ∧ Q) → ¬Q ∨ ¬P
-  intro (h: ¬(P ∧ Q))
+  exact hp
+  exact hq
+}
 
+have f : False := h conjuncao
+assumption
+----- Caso não P
+right
+exact hp
 
-  ---parte ¬Q ∨ ¬P → ¬(P ∧ Q)
-  sorry
+-------------- PARTE  (¬ Q ∨ ¬ P) → ¬ (P ∧ Q) ------------
+
+intro (h' : (¬ Q ∨ ¬ P))--h_disjuncao
+intro (h'': (P ∧ Q))--h_conjuncao
+rcases h' with (nq|np)
+-- Caso nq: ¬ Q
+rcases h'' with ⟨p, q⟩
+have f: False := nq q
+assumption
+-- Caso np: ¬ P
+rcases h'' with ⟨p, q⟩
+have f: False := np p
+assumption
 
 
 theorem demorgan_disj_law :
