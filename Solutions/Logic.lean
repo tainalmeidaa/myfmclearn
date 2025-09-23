@@ -373,13 +373,43 @@ theorem distr_conj_disj_converse :
   (P ∧ Q) ∨ (P ∧ R) → P ∧ (Q ∨ R)  := by
   sorry
 
+
+
 theorem distr_disj_conj :
   P ∨ (Q ∧ R) → (P ∨ Q) ∧ (P ∨ R)  := by
-  sorry
+
+  intro (h: P ∨ (Q ∧ R))
+  rcases h with (h'|h'')-- separo em casos
+
+  ----------------CASO P-----------
+  constructor -- split no meu alvo (P ∨ Q) ∧ (P ∨ R)
+
+  ----parte (P ∨ Q)
+  left
+  exact h'
+  ----parte (P ∨ R)
+  left
+  exact h'
+
+  --------------CASO (Q ∧ R)--------
+  rcases h'' with ⟨pq,pr⟩ ---separo em partes os meus dados (Q ∧ R)
+  constructor --- split no meu alvo (P ∨ Q) ∧ (P ∨ R)
+
+  ----parte (P ∨ Q)
+  right
+  exact pq
+  ----parte (P ∨ R)
+  right
+  exact pr
+
 
 theorem distr_disj_conj_converse :
   (P ∨ Q) ∧ (P ∨ R) → P ∨ (Q ∧ R)  := by
+
+  intro (h: (P ∨ Q) ∧ (P ∨ R))
   sorry
+
+
 
 
 ------------------------------------------------
