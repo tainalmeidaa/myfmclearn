@@ -260,7 +260,13 @@ theorem demorgan_disj_converse :
 theorem demorgan_conj :
   ¬ (P ∧ Q) → (¬ Q ∨ ¬ P)  := by
 
+  intro h
+  false_or_by_contra
   sorry
+
+
+
+
 
 
 theorem demorgan_conj_converse :
@@ -279,11 +285,65 @@ theorem demorgan_conj_converse :
 
 theorem demorgan_conj_law :
   ¬ (P ∧ Q) ↔ (¬ Q ∨ ¬ P)  := by
+  constructor
+  ---parte ¬(P ∧ Q) → ¬Q ∨ ¬P
+  intro (h: ¬(P ∧ Q))
+
+
+  ---parte ¬Q ∨ ¬P → ¬(P ∧ Q)
   sorry
+
 
 theorem demorgan_disj_law :
   ¬ (P ∨ Q) ↔ (¬ P ∧ ¬ Q)  := by
+
+  constructor
+
+  --- parte ¬(P ∨ Q) → ¬P ∧ ¬Q
+  intro (h : ¬(P ∨ Q))
+  by_cases p : P
+  have h' : P ∨ Q := by{
+    left
+    exact p
+  }
+
+  constructor
+  --- não P
+  intro (p' : P)
+  have boom : False := h h'
+  exact boom
+  --- não Q
+  intro (q: Q)
+  have buum : False := h h'
+  exact buum
+
+  constructor
+  exact p
+
+  have h' : P ∨ Q := by{
+    by_cases q' : Q
+    right
+    exact q'
+
+    left
+    false_or_by_contra
+    by_cases p'': P
+    --- caso p
+    contradiction
+
+    ----------
+
+
+
+  }
+
+  intro (q'' : Q)
+  have bamm : False :=  h h'
+  exact bamm
+
   sorry
+
+  --- parte ¬P ∧ ¬Q → ¬(P ∨ Q)
 
 
 ------------------------------------------------
